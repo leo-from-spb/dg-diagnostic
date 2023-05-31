@@ -1,0 +1,3 @@
+package lb.datagrip.diagnostic
+
+object DataGripIntrospectionLogSupport
