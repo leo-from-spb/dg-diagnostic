@@ -1,7 +1,11 @@
+import org.jetbrains.gradle.ext.packagePrefix
+import org.jetbrains.gradle.ext.settings
+
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.8.21"
     id("org.jetbrains.intellij") version "1.13.3"
+    id("org.jetbrains.gradle.plugin.idea-ext") version "1.1.7"
 }
 
 group = "lb.datagrip.diagnostic"
@@ -18,6 +22,20 @@ intellij {
     type.set("IC") // Target IDE Platform
 
     plugins.set(listOf(/* Plugin Dependencies */))
+}
+
+sourceSets.getByName("main") {
+    java.srcDir("src/main/java")
+    java.srcDir("src/main/kotlin")
+}
+sourceSets.getByName("test") {
+    java.srcDir("src/test/java")
+    java.srcDir("src/test/kotlin")
+}
+
+idea.module.settings {
+    packagePrefix["src/main/kotlin"] = "lb.datagrip.diagnostic"
+    packagePrefix["src/test/kotlin"] = "lb.datagrip.diagnostic"
 }
 
 tasks {
